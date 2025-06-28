@@ -34,6 +34,9 @@ php artisan serve
 php artisan queue:work
 ```
 
+## 🔗 API Doc
+https://documenter.getpostman.com/view/5072202/2sB2xFfno6
+
 ## Coding Task (Laravel) for GlobalyHub
 
 Build a Laravel API with the following functionality:

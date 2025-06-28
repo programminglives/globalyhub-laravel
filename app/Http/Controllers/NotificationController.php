@@ -22,6 +22,7 @@ class NotificationController extends Controller
             'message' => 'required|string',
         ]);
 
+        // Notification Rate Limit
         $recentCount = Notification::where('user_id', $user->id)
             ->where('created_at', '>=', Carbon::now()->subHour())
             ->count();
@@ -32,6 +33,7 @@ class NotificationController extends Controller
                 'message' => 'Rate limit exceeded: Max 10 notifications per hour per user.'
             ], 429);
         }
+        // Notification Rate Limit
 
         $notification = Notification::create([
             'user_id' => $user->id,
@@ -60,6 +62,8 @@ class NotificationController extends Controller
             'status' => $request->input('status'),
             'retries' => $request->input('retries', $notification->retries),
         ]);
+
+        // Todo: Handle failed status
         return response()->json(['success' => true]);
     }
 
