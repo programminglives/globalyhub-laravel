@@ -1,8 +1,38 @@
 <p align="center">
-<a href="https://laravel.com" target="_blank">
+<a href="https://sanjayapb.com.np" target="_blank">
 <img src="https://static.wixstatic.com/media/5222ff_4e39373370694a619e2b96febe873809~mv2.png/v1/fill/w_200,h_38,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5222ff_4e39373370694a619e2b96febe873809~mv2.png" width="400" alt="Laravel Logo">
 </a>
 </p>
+
+
+## 🛠 Installation
+
+1. Clone the repository and navigate to the project folder:
+
+```
+git clone https://github.com/programminglives/globalyhub-laravel.git
+cd globalyhub-laravel
+```
+
+2. Copy .env.example file, rename it to .env and update DB and RabbitMQ variables
+
+```
+cp .env.example .env
+```
+
+3. Install dependencies, migrate and seed the database:
+
+```
+composer install
+php artisan migrate --seed
+```
+
+4. Start the development server and run the queue on a separate terminal:
+
+```
+php artisan serve
+php artisan queue:work
+```
 
 ## Coding Task (Laravel) for GlobalyHub
 

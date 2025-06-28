@@ -14,3 +14,4 @@ Route::get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/notifications', [NotificationController::class, 'publish']);
 });
+Route::patch('/notifications/{id}/status', [NotificationController::class, 'updateStatus']);

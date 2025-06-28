@@ -35,4 +35,21 @@ class NotificationController extends Controller
             'message' => ucfirst($validated['type']) . " notification has been published."
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->update([
+            'status' => $request->input('status'),
+            'retries' => $request->input('retries', $notification->retries),
+        ]);
+        return response()->json(['success' => true]);
+    }
+
+
 }

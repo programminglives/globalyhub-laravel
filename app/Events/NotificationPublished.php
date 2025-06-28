@@ -16,6 +16,7 @@ class NotificationPublished implements ShouldBroadcast, ShouldQueue
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private Notification $notification;
+    public $notificationId;
 
     /**
      * Create a new event instance.
@@ -23,6 +24,7 @@ class NotificationPublished implements ShouldBroadcast, ShouldQueue
     public function __construct($notification)
     {
         $this->notification = $notification;
+        $this->notificationId = $notification->id;
     }
 
     /**
@@ -33,7 +35,7 @@ class NotificationPublished implements ShouldBroadcast, ShouldQueue
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new PrivateChannel('default'),
         ];
     }
 }
