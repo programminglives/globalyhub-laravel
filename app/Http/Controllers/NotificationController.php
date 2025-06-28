@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NotificationPublished;
 use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,17 @@ class NotificationController extends Controller
             'type' => 'required|string',
             'message' => 'required|string',
         ]);
+
+        $recentCount = Notification::where('user_id', $user->id)
+            ->where('created_at', '>=', Carbon::now()->subHour())
+            ->count();
+
+        if ($recentCount >= 10) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Rate limit exceeded: Max 10 notifications per hour per user.'
+            ], 429);
+        }
 
         $notification = Notification::create([
             'user_id' => $user->id,
